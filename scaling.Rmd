@@ -20,6 +20,29 @@ Before proceeding, we'll load the packages we will need for this tutorial.
 ```{r, echo=F}
 library(kableExtra)
 ```
+```{r}
+install.packages("quanteda")
+install.packages("quanteda.textmodels")
+
+library(quanteda)
+library(quanteda.textmodels)
+```
+```{r}
+install.packages(c(
+  "quanteda",
+  "quanteda.textmodels",
+  "quanteda.textstats",
+  "quanteda.textplots",
+  "readtext"
+))
+```
+```{r}
+library(quanteda)
+library(quanteda.textmodels)
+library(quanteda.textstats)
+library(quanteda.textplots)
+library(readtext)
+```
 
 ```{r, message=F}
 library(dplyr)
@@ -81,6 +104,12 @@ dfm_tweets
 ```
 
 ## Estimate wordfish model
+```{r}
+library(quanteda)
+library(quanteda.textmodels)
+
+wf <- textmodel_wordfish(dfm_newstweets)
+```
 
 Once we have our data in this format, we are able to group and trim the document feature matrix before estimating the wordfish model.
 
@@ -97,8 +126,7 @@ dim(dfm_newstweets)
 
 #### estimate the Wordfish model ####
 set.seed(123L)
-dfm_newstweets_results <- textmodel_wordfish(dfm_newstweets, 
-                                             sparse = TRUE)
+dfm_newstweets_results <- wf <- quanteda.textmodels::textmodel_wordfish(dfm_newstweets)
 
 ```
 
@@ -125,6 +153,10 @@ textplot_scale1d(dfm_newstweets_results, margin = "features")
 ```
 
 And we can also look at these features.
+```{r}
+install.packages("kableExtra")
+library(kableExtra)
+```
 
 ```{r}
 
